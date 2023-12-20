@@ -20,14 +20,18 @@ class Block:
             self.change = (0, 1)
         if direction is gc.Direction.DOWN:
             self.change = (0, -1)
+        if direction is gc.Direction.LEFT:
+            self.change = (-1,0)
+        if direction is gc.Direction.RIGHT:
+            self.change = (1,0)
     
     def move(self):
         if self.change[1] == 1 and self.y >= self.height:
             self.y -= self.height
         if self.change[1] == -1 and self.y < self.screen.get_size()[1] - self.height:
             self.y += self.height
-        if self.change[0] == 1 and self.x >= self.width:
-            self.x -= self.width
-        if self.change[0] == -1 and self.x < self.screen.get_size()[0] - self.width:
+        if self.change[0] == 1 and self.x < self.screen.get_size()[0] - self.width:
             self.x += self.width
+        if self.change[0] == -1 and self.x >= self.width:
+            self.x -= self.width
         self.draw()
